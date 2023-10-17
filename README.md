@@ -7,6 +7,4 @@ Welcome to the XML Generator project! This tool is designed to simplify the proc
 The XML Generator project is built to streamline the XML creation process, making it accessible to a wider audience. Key features include:
 
 * Utilizing an Excel file to define the XML structure.
-* Generating an interactive HTML page for user input.
-* Real-time XML generation.
-* Displaying the resulting XML on the HTML interface.
+* Generating an XML structured file with random values
