@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Input and Result</title>
+	<style>
+		.container {
+			display: flex;
+			flex-wrap: wrap;
+		}
+		
+		.left {
+	        width: 50%;
+            float: left;    
+		}
+		
+		.right {
+            width: 50%;
+            float: right;    
+	
+		}
+		
+		textarea {
+			width: 50%;
+			height: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="left">
+			<form id="frm1">
+                <label for="input1">Input 1:</label>
+                <input type="text" id="input1" name="input1"><br><br>
+                
+                <label for="input2">Input 2:</label>
+                <input type="text" id="input2" name="input2"><br><br>
+                
+                <input type="button" onclick="displayResult()" value="Submit">
+              </form>
+		</div>
+		<div class="right">
+			<!-- Results displayed here -->
+			<textarea id="result" readonly></textarea>
+		</div>
+	</div>
+
+    <script>
+        function displayResult(){
+            var x = document.getElementById("frm1");
+            console.log(x);
+            var text = "";
+            var i;
+            for (i = 0; i < x.length ;i++) {
+               text += x.elements[i].value + "<br>";
+            }
+            document.getElementById("result").innerHTML = text;
+            console.log(text);
+
+        }
+  </script>
+</body>
+</html>

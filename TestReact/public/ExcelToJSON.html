@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Excel to JSON | Javacodepoint</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/2.1.0/json2html.min.js"></script>
+
+</head>
+
+<body>
+  <h1>Upload an excel file to convert into JSON</h1>
+  <input type="file" id="file_upload" />
+  <button onclick="upload()">Upload</button>
+  <br />
+  <br />
+  <!-- container to display the json result -->
+  <textarea id="json-result" style="display: none; height: 500px; width: 350px"></textarea>
+  <div id="app"></div>
+
+  <script>
+    // Method to upload a valid excel file
+    function upload() {
+      var files = document.getElementById("file_upload").files;
+      if (files.length == 0) {
+        alert("Please choose any file...");
+        return;
+      }
+      var filename = files[0].name;
+      var extension = filename
+        .substring(filename.lastIndexOf("."))
+        .toUpperCase();
+      if (extension == ".XLS" || extension == ".XLSX") {
+        excelFileToJSON(files[0]);
+      } else {
+        alert("Please select a valid excel file.");
+      }
+    }
+    //Method to read excel file and convert it into JSON
+    function excelFileToJSON(file) {
+      var reader = new FileReader();
+      reader.readAsBinaryString(file);
+      reader.onload = function (e) {
+        var data = e.target.result;
+        var workbook = XLSX.read(data, { type: "binary" });
+        var worksheet = workbook.Sheets["Full_View"];
+
+        // create the initial object with the root node
+        const nestedObject = { level: 0, name: worksheet[`C2`].v, xmlTag: worksheet[`D2`].v, definition: worksheet[`V2`].v, children: [] };
+        // keep track of the last node of each level
+        const lastNodes = { 0: nestedObject };
+
+        // iterate over the rows of the worksheet
+        for (let rowNum = 3; ; rowNum++) {
+          // get the level and name of the current row
+          const level = worksheet[`B${rowNum}`]?.v;
+          const name = worksheet[`C${rowNum}`]?.v.trim();
+          const xmlTag = worksheet[`D${rowNum}`]?.v;
+          const mult = worksheet[`E${rowNum}`]?.v;
+          const typeCode = worksheet[`F${rowNum}`]?.v;
+          const isIgnored = worksheet[`N${rowNum}`]?.v;
+          const isRemoved = worksheet[`M${rowNum}`]?.v;
+          const definition = worksheet[`V${rowNum}`]?.v;
+
+          // break out of the loop if there are no more rows
+          if (!level || !name) {
+            break;
+          }
+
+          // create a new node for the current row
+          if (xmlTag !== undefined && (isRemoved === undefined || !isRemoved.includes("Yes"))) {
+            const newNode = { level, name, xmlTag, mult, typeCode, isIgnored, isRemoved, definition, children: [] };
+            // add the new node to the parent node
+            if (level - 1 in lastNodes) {
+              lastNodes[level - 1].children.push(newNode);
+            } else {
+              nestedObject.children.push(newNode);
+            }
+
+            // update the last node for the current level
+            lastNodes[level] = newNode;
+          } //Otherwise do nothing
+        }
+
+        // convert the nested object to JSON
+        const jsonData = JSON.stringify(nestedObject, null, 2);
+        const jsonDataArrays = `[${jsonData}]`
+
+        //displaying the json result
+        var resultEle = document.getElementById("json-result");
+        resultEle.value = jsonDataArrays;
+        resultEle.style.display = "block";
+      };
+    }
+  </script>
+</body>
+
+</html>

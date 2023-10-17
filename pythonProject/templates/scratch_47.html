@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>UI</title>
+    <script type="text/javascript" src="nunjucks.js"></script>
+    <script type="text/javascript" src="jquery-3.6.4.js"></script>
+    <script type="text/javascript" src="jquery.serializejson.js"></script>
+</head>
+
+<body>
+
+<p>Enter names in the fields, then click "Submit" to submit the form:</p>
+
+<form id="myForm">
+    TagName: <input type="text" name="tagName"><br>
+    tags[][firstName]: <input type="text" name="tags[][firstName]"><br>
+    tags[][lastName]: <input type="text" name="tags[][lastName]"><br><br>
+    tags[][level]: <input type="text" name="tags[][level]"><br><br>
+    <input type="button" onclick="myFunction()" value="Submit">
+</form>
+
+<script>
+    function myFunction() {
+        const env = nunjucks.configure({autoescape: true});
+        env.addGlobal('parseInt', parseInt);
+        const template = `<?xml version="1.0" encoding="UTF-8" ?>
+
+<root>
+    <tags>
+        {% for tag in tags %}
+        {% if parseInt(tag.level) > 1 %}
+            <{{tagName}} firstName="{{ tag.firstName }}" lastName="{{ tag.lastName }}" level="{{ tag.level }}">
+            {{tagName}}{{(" " * row['Lvl'])|safe}}
+            </{{tagName}}>
+        {% endif %}
+        {% endfor %}
+    </tags>
+</root>
+`;
+
+        const myFormJson = $('#myForm').serializeJSON();
+        const output = nunjucks.renderString(template, myFormJson);
+
+        console.log(template)
+        console.log(output)
+        console.log(myFormJson)
+    }
+</script>
+
+</body>
+</html>

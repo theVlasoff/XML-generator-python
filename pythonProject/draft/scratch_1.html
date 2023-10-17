@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>FreeText fields from Excel</title>
+    <script type="text/javascript" src="https://mozilla.github.io/nunjucks/files/nunjucks.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/3.2.1/jquery.serializejson.js"></script>
+    <style>
+      label, input {
+        display: inline-block;
+        margin-top: 5px;
+        font-family: Consolas,monospace
+      }
+    </style>
+  </head>
+  <body>
+
+          <h1>FreeText fields from Excel</h1>
+          <form id="myForm">
+            <div id="dynamicElements">
+            {% for row in rows %}
+            {% if row['Is Removed'] is not string and row['XML Tag'] is string: %}
+
+            {% if row['Mult'] is not string: %}
+              <div class="dynamicElement">
+                <label>Level: {{ row['Lvl']}} | {{ row['Name'].strip() }} </label>
+                <input type="hidden" id="{{ row['Lvl'] }}" name="{{ row['XML Tag'] }}">
+              </div>
+            {% elif row['Type / Code'] is not string: %}
+              <div class="dynamicElement">
+                <label>Level: {{row['Lvl']}} | {{ row['Name'].strip() }} {{ row['Mult'].replace("  ", " ") }}</label>
+                <input type="hidden" id="{{ row['Lvl'] }}" name="{{ row['XML Tag'] }}">
+              </div>
+            {% else %}
+              <div class="dynamicElement">
+                <label>Level: {{row['Lvl']}} | {{ row['Name'].strip() }}  {{ row['Mult'].replace("  ", " ") }} {{row['Type / Code']}}</label>
+                <input type="text" id="{{ row['Lvl'] }}" name="{{ row['XML Tag'] }}">
+              </div>
+              {% endif %}
+            <br>
+
+            {% endif %}
+            {% endfor %}
+            <input type="button" onclick="myFunction()" value="Submit">
+            
+            </div>
+          </form>
+
+
+<script>
+    function myFunction() {      
+      // Create the XML document
+      var xmlDoc = document.implementation.createDocument("", "", null);
+
+      // Create the root element
+      var root = xmlDoc.createElement(document.getElementById("0").name.slice(1,-1));
+      xmlDoc.appendChild(root);
+      
+      // Loop through the dynamic elements and create child elements
+      var dynamicElements = document.querySelectorAll(".dynamicElement");
+      for (var i = 1; i < dynamicElements.length; i++) {
+        var name = dynamicElements[i].querySelector("input").value;
+
+        var nameElement = xmlDoc.createElement(dynamicElements[i].querySelector("input").getAttribute("name").slice(1,-1));
+        nameElement.appendChild(xmlDoc.createTextNode(name));
+        root.appendChild(nameElement);
+      }
+
+      // Serialize the XML document to a string
+      var xmlString = new XMLSerializer().serializeToString(xmlDoc);
+
+      // Do something with the XML string, like send it to a server
+      console.log(xmlString);
+    }
+</script>
+
+
+  </body>
+</html>

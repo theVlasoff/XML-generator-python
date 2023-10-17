@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HTML Form to XML Example</title>
+</head>
+<body>
+  <form id="myForm">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName"><br><br>
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName"><br><br>
+    <input type="submit" value="Submit" onclick="submitForm(event)">
+  </form>
+  <script>
+    function submitForm(event) {
+      event.preventDefault(); // prevent default form submission behavior
+
+      // Create the XML document
+      var xmlDoc = document.implementation.createDocument("", "", null);
+
+      // Create the root element
+      var root = xmlDoc.createElement("SecuritiesAccountCreationRequest");
+      xmlDoc.appendChild(root);
+
+      // Loop through the form fields and create the XML elements
+      var formFields = document.querySelectorAll('#myForm [name]');
+      formFields.forEach(function (formField) {
+        var elementName = formField.getAttribute('name');
+        var elementValue = formField.value;
+
+        // Skip hidden fields and submit button
+        if (formField.type === 'hidden' || formField.type === 'submit') {
+          return;
+        }
+
+        // Create the XML element
+        var element = xmlDoc.createElement(elementName);
+        element.appendChild(xmlDoc.createTextNode(elementValue));
+
+        // Append the element to the appropriate parent element
+        var parentElement = getParentElement(xmlDoc, root, elementName);
+        parentElement.appendChild(element);
+      });
+
+      // Serialize the XML document to a string
+      var xmlString = new XMLSerializer().serializeToString(xmlDoc);
+
+      // Log the XML string to the console
+      console.log(xmlString);
+    }
+
+    function getParentElement(xmlDoc, root, elementName) {
+      var parentElement = root;
+      var parentElementName = elementName.split('.')[0];
+
+      // If the element has a parent, create it if it doesn't exist yet
+      if (parentElementName !== root.tagName) {
+        var parentElementQuery = parentElementName.replace(/-/g, '\\-');
+        var existingParentElement = xmlDoc.querySelector(parentElementQuery);
+        if (existingParentElement) {
+          parentElement = existingParentElement;
+        } else {
+          parentElement = xmlDoc.createElement(parentElementName);
+          root.appendChild(parentElement);
+        }
+      }
+
+      return parentElement;
+    }
+  </script>
+</body>
+</html>

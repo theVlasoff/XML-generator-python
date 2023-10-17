@@ -1,0 +1,1341 @@
+[{
+  "level": 0,
+  "name": "Securities Account Creation Request V01 (reda.018.001.01)",
+  "xmlTag": "<SctiesAcctCreReq>",
+  "definition": "The SecuritiesAccountCreationRequest message message is sent by an instructing party to the executing party to instruct the creation of a new securities account with the required account attributes details.\r\r\n\r\r\nUsage:\r\r\nProcessing and confirmation of the securities account creation request message are provided via a SecuritiesAccountStatusAdvice message.",
+  "children": [
+    {
+      "level": "1",
+      "name": "Message Header",
+      "xmlTag": "<MsgHdr>",
+      "mult": "[0..1]",
+      "definition": "Common business identification for the message.",
+      "children": [
+        {
+          "level": "2",
+          "name": "Message Identification",
+          "xmlTag": "<MsgId>",
+          "mult": "[1..1]",
+          "typeCode": "text{1,35}",
+          "definition": "Point to point reference, as assigned by the sender, to unambiguously identify the message.\r\r\nUsage: The sender has to make sure that MessageIdentification is unique for a pre-agreed period.",
+          "children": []
+        },
+        {
+          "level": "2",
+          "name": "Creation Date Time",
+          "xmlTag": "<CreDtTm>",
+          "mult": "[0..1]",
+          "typeCode": "dateTime",
+          "definition": "Date and time at which the message was created.",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": "1",
+      "name": "Securities Account",
+      "xmlTag": "<SctiesAcct>",
+      "mult": "[1..1]",
+      "definition": "Securities account to be created in the executing party system.",
+      "children": [
+        {
+          "level": "2",
+          "name": "Account Owner",
+          "xmlTag": "<AcctOwnr>",
+          "mult": "[1..1]",
+          "definition": "Party that legally owns the account.",
+          "children": [
+            {
+              "level": "3",
+              "name": "Identification",
+              "xmlTag": "<Id>",
+              "mult": "[1..1]",
+              "isIgnored": "Yes",
+              "definition": "Unique identification to unambiguously identify the party within the system.",
+              "children": [
+                {
+                  "level": "4",
+                  "name": "Identification",
+                  "xmlTag": "<Id>",
+                  "mult": "[1..1]",
+                  "typeCode": "Choice",
+                  "isIgnored": "Yes (parent)",
+                  "definition": "Unique identification of the party.",
+                  "children": [
+                    {
+                      "level": "5",
+                      "name": "Any BIC",
+                      "xmlTag": "<AnyBIC>",
+                      "mult": "[1..1]",
+                      "typeCode": "text\r\r\n[A-Z0-9]{4,4}[A-Z]{2,2}[A-Z0-9]{2,2}([A-Z0-9]{3,3}){0,1}",
+                      "isIgnored": "Yes (parent)",
+                      "definition": "Code allocated to a financial or non-financial institution by the ISO 9362 Registration Authority, as described in ISO 9362 \"Banking - Banking telecommunication messages - Business identifier code (BIC)\".",
+                      "children": []
+                    },
+                    {
+                      "level": "5",
+                      "name": "Proprietary Identification",
+                      "xmlTag": "<PrtryId>",
+                      "mult": "[1..1]",
+                      "isIgnored": "Yes (parent)",
+                      "definition": "Unique and unambiguous identifier, as assigned to a financial institution using a proprietary identification scheme.",
+                      "children": [
+                        {
+                          "level": "6",
+                          "name": "Identification",
+                          "xmlTag": "<Id>",
+                          "mult": "[1..1]",
+                          "typeCode": "text{1,35}",
+                          "isIgnored": "Yes (parent)",
+                          "definition": "Proprietary information, often a code, issued by the data source scheme issuer.",
+                          "children": []
+                        },
+                        {
+                          "level": "6",
+                          "name": "Issuer",
+                          "xmlTag": "<Issr>",
+                          "mult": "[1..1]",
+                          "typeCode": "text{1,35}",
+                          "isIgnored": "Yes (parent)",
+                          "definition": "Entity that assigns the identification.",
+                          "children": []
+                        },
+                        {
+                          "level": "6",
+                          "name": "Scheme Name",
+                          "xmlTag": "<SchmeNm>",
+                          "mult": "[0..1]",
+                          "typeCode": "text{1,35}",
+                          "isIgnored": "Yes (parent)",
+                          "definition": "Short textual description of the scheme.",
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "level": "5",
+                      "name": "Name And Address",
+                      "xmlTag": "<NmAndAdr>",
+                      "mult": "[1..1]",
+                      "isIgnored": "Yes (parent)",
+                      "definition": "Name and address of a party.",
+                      "children": [
+                        {
+                          "level": "6",
+                          "name": "Name",
+                          "xmlTag": "<Nm>",
+                          "mult": "[1..1]",
+                          "typeCode": "text{1,350}",
+                          "isIgnored": "Yes (parent)",
+                          "definition": "Name by which a party is known and which is usually used to identify that party.",
+                          "children": []
+                        },
+                        {
+                          "level": "6",
+                          "name": "Address",
+                          "xmlTag": "<Adr>",
+                          "mult": "[0..1]",
+                          "isIgnored": "Yes (parent)",
+                          "definition": "Postal address of the party.",
+                          "children": [
+                            {
+                              "level": "7",
+                              "name": "Address Type",
+                              "xmlTag": "<AdrTp>",
+                              "mult": "[0..1]",
+                              "typeCode": "text",
+                              "isIgnored": "Yes (parent)",
+                              "definition": "Identifies the nature of the postal address.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Address Line",
+                              "xmlTag": "<AdrLine>",
+                              "mult": "[0..5]",
+                              "typeCode": "text{1,70}",
+                              "isIgnored": "Yes (parent)",
+                              "definition": "Information that locates and identifies a specific address, as defined by postal services, that is presented in free format text.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Street Name",
+                              "xmlTag": "<StrtNm>",
+                              "mult": "[0..1]",
+                              "typeCode": "text{1,70}",
+                              "isIgnored": "Yes (parent)",
+                              "definition": "Name of a street or thoroughfare.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Building Number",
+                              "xmlTag": "<BldgNb>",
+                              "mult": "[0..1]",
+                              "typeCode": "text{1,16}",
+                              "isIgnored": "Yes (parent)",
+                              "definition": "Number that identifies the position of a building on a street.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Post Code",
+                              "xmlTag": "<PstCd>",
+                              "mult": "[0..1]",
+                              "typeCode": "text{1,16}",
+                              "isIgnored": "Yes (parent)",
+                              "definition": "Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Town Name",
+                              "xmlTag": "<TwnNm>",
+                              "mult": "[0..1]",
+                              "typeCode": "text{1,35}",
+                              "isIgnored": "Yes (parent)",
+                              "definition": "Name of a built-up area, with defined boundaries, and a local government.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Country Sub Division",
+                              "xmlTag": "<CtrySubDvsn>",
+                              "mult": "[0..1]",
+                              "typeCode": "text{1,35}",
+                              "isIgnored": "Yes (parent)",
+                              "definition": "Identifies a subdivision of a country for example, state, region, county.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Country",
+                              "xmlTag": "<Ctry>",
+                              "mult": "[1..1]",
+                              "typeCode": "text\r\r\n[A-Z]{2,2}",
+                              "isIgnored": "Yes (parent)",
+                              "definition": "Nation with its own government.",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "level": "4",
+                  "name": "LEI",
+                  "xmlTag": "<LEI>",
+                  "mult": "[0..1]",
+                  "typeCode": "text\r\r\n[A-Z0-9]{18,18}[0-9]{2,2}",
+                  "isIgnored": "Yes (parent)",
+                  "definition": "Legal entity identification as an alternate identification for a party.",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "level": "3",
+              "name": "Responsible Party Identification",
+              "xmlTag": "<RspnsblPtyId>",
+              "mult": "[0..1]",
+              "definition": "Unique identification of the party responsible for the maintenance of the party reference data.",
+              "children": [
+                {
+                  "level": "4",
+                  "name": "Identification",
+                  "xmlTag": "<Id>",
+                  "mult": "[1..1]",
+                  "typeCode": "Choice",
+                  "definition": "Unique identification of the party.",
+                  "children": [
+                    {
+                      "level": "5",
+                      "name": "Any BIC",
+                      "xmlTag": "<AnyBIC>",
+                      "mult": "[1..1]",
+                      "typeCode": "text\r\r\n[A-Z0-9]{4,4}[A-Z]{2,2}[A-Z0-9]{2,2}([A-Z0-9]{3,3}){0,1}",
+                      "definition": "Code allocated to a financial or non-financial institution by the ISO 9362 Registration Authority, as described in ISO 9362 \"Banking - Banking telecommunication messages - Business identifier code (BIC)\".",
+                      "children": []
+                    },
+                    {
+                      "level": "5",
+                      "name": "Proprietary Identification",
+                      "xmlTag": "<PrtryId>",
+                      "mult": "[1..1]",
+                      "definition": "Unique and unambiguous identifier, as assigned to a financial institution using a proprietary identification scheme.",
+                      "children": [
+                        {
+                          "level": "6",
+                          "name": "Identification",
+                          "xmlTag": "<Id>",
+                          "mult": "[1..1]",
+                          "typeCode": "text{1,35}",
+                          "definition": "Proprietary information, often a code, issued by the data source scheme issuer.",
+                          "children": []
+                        },
+                        {
+                          "level": "6",
+                          "name": "Issuer",
+                          "xmlTag": "<Issr>",
+                          "mult": "[1..1]",
+                          "typeCode": "text{1,35}",
+                          "isIgnored": "Yes",
+                          "definition": "Entity that assigns the identification.",
+                          "children": []
+                        },
+                        {
+                          "level": "6",
+                          "name": "Scheme Name",
+                          "xmlTag": "<SchmeNm>",
+                          "mult": "[0..1]",
+                          "typeCode": "text{1,35}",
+                          "definition": "Short textual description of the scheme.",
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "level": "5",
+                      "name": "Name And Address",
+                      "xmlTag": "<NmAndAdr>",
+                      "mult": "[1..1]",
+                      "definition": "Name and address of a party.",
+                      "children": [
+                        {
+                          "level": "6",
+                          "name": "Name",
+                          "xmlTag": "<Nm>",
+                          "mult": "[1..1]",
+                          "typeCode": "text{1,350}",
+                          "definition": "Name by which a party is known and which is usually used to identify that party.",
+                          "children": []
+                        },
+                        {
+                          "level": "6",
+                          "name": "Address",
+                          "xmlTag": "<Adr>",
+                          "mult": "[0..1]",
+                          "definition": "Postal address of the party.",
+                          "children": [
+                            {
+                              "level": "7",
+                              "name": "Address Type",
+                              "xmlTag": "<AdrTp>",
+                              "mult": "[0..1]",
+                              "typeCode": "text",
+                              "definition": "Identifies the nature of the postal address.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Address Line",
+                              "xmlTag": "<AdrLine>",
+                              "mult": "[0..5]",
+                              "typeCode": "text{1,70}",
+                              "definition": "Information that locates and identifies a specific address, as defined by postal services, that is presented in free format text.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Street Name",
+                              "xmlTag": "<StrtNm>",
+                              "mult": "[0..1]",
+                              "typeCode": "text{1,70}",
+                              "definition": "Name of a street or thoroughfare.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Building Number",
+                              "xmlTag": "<BldgNb>",
+                              "mult": "[0..1]",
+                              "typeCode": "text{1,16}",
+                              "definition": "Number that identifies the position of a building on a street.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Post Code",
+                              "xmlTag": "<PstCd>",
+                              "mult": "[0..1]",
+                              "typeCode": "text{1,16}",
+                              "definition": "Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Town Name",
+                              "xmlTag": "<TwnNm>",
+                              "mult": "[0..1]",
+                              "typeCode": "text{1,35}",
+                              "definition": "Name of a built-up area, with defined boundaries, and a local government.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Country Sub Division",
+                              "xmlTag": "<CtrySubDvsn>",
+                              "mult": "[0..1]",
+                              "typeCode": "text{1,35}",
+                              "definition": "Identifies a subdivision of a country for example, state, region, county.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Country",
+                              "xmlTag": "<Ctry>",
+                              "mult": "[1..1]",
+                              "typeCode": "text\r\r\n[A-Z]{2,2}",
+                              "definition": "Nation with its own government.",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "level": "4",
+                  "name": "LEI",
+                  "xmlTag": "<LEI>",
+                  "mult": "[0..1]",
+                  "typeCode": "text\r\r\n[A-Z0-9]{18,18}[0-9]{2,2}",
+                  "definition": "Legal entity identification as an alternate identification for a party.",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "level": "2",
+          "name": "Identification",
+          "xmlTag": "<Id>",
+          "mult": "[1..1]",
+          "typeCode": "text{1,35}",
+          "definition": "Unique and unambiguous identification for the account between the account owner and the account servicer.",
+          "children": []
+        },
+        {
+          "level": "2",
+          "name": "Type",
+          "xmlTag": "<Tp>",
+          "mult": "[1..1]",
+          "typeCode": "Choice",
+          "definition": "Specifies the type of the securities account.",
+          "children": [
+            {
+              "level": "3",
+              "name": "Code",
+              "xmlTag": "<Cd>",
+              "mult": "[1..1]",
+              "typeCode": "text",
+              "definition": "System securities account type, in a coded form.",
+              "children": []
+            },
+            {
+              "level": "3",
+              "name": "Proprietary",
+              "xmlTag": "<Prtry>",
+              "mult": "[1..1]",
+              "definition": "System securities account type, in a proprietary form.",
+              "children": [
+                {
+                  "level": "4",
+                  "name": "Identification",
+                  "xmlTag": "<Id>",
+                  "mult": "[1..1]",
+                  "typeCode": "text\r\r\n[a-zA-Z0-9]{4}",
+                  "definition": "Proprietary information, often a code, issued by the data source scheme issuer.",
+                  "children": []
+                },
+                {
+                  "level": "4",
+                  "name": "Issuer",
+                  "xmlTag": "<Issr>",
+                  "mult": "[1..1]",
+                  "typeCode": "text{1,35}",
+                  "isIgnored": "Yes",
+                  "definition": "Entity that assigns the identification.",
+                  "children": []
+                },
+                {
+                  "level": "4",
+                  "name": "Scheme Name",
+                  "xmlTag": "<SchmeNm>",
+                  "mult": "[0..1]",
+                  "typeCode": "text{1,35}",
+                  "definition": "Short textual description of the scheme.",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "level": "2",
+          "name": "Opening Date",
+          "xmlTag": "<OpngDt>",
+          "mult": "[1..1]",
+          "typeCode": "date",
+          "isIgnored": "Yes",
+          "definition": "Legal opening date of the securities account.",
+          "children": []
+        },
+        {
+          "level": "2",
+          "name": "Closing Date",
+          "xmlTag": "<ClsgDt>",
+          "mult": "[0..1]",
+          "typeCode": "date",
+          "definition": "Legal closing date of the securities account.",
+          "children": []
+        },
+        {
+          "level": "2",
+          "name": "Hold Indicator",
+          "xmlTag": "<HldInd>",
+          "mult": "[1..1]",
+          "typeCode": "boolean",
+          "isIgnored": "Yes",
+          "definition": "Indicates whether the securities account is on hold or not.\r\r\n\r\r\nUsage:\r\r\n- Meaning when true: account is in hold status.\r\r\n- Meaning when false: account is in release status.",
+          "children": []
+        },
+        {
+          "level": "2",
+          "name": "Negative Position",
+          "xmlTag": "<NegPos>",
+          "mult": "[1..1]",
+          "typeCode": "boolean",
+          "isIgnored": "Yes",
+          "definition": "Indicates whether the securities account can hold a negative position in a security or not.",
+          "children": []
+        },
+        {
+          "level": "2",
+          "name": "Market Specific Attribute",
+          "xmlTag": "<MktSpcfcAttr>",
+          "mult": "[0..*]",
+          "definition": "Additional attributes defined by a central security depositary for a party.",
+          "children": [
+            {
+              "level": "3",
+              "name": "Name",
+              "xmlTag": "<Nm>",
+              "mult": "[1..1]",
+              "typeCode": "text{1,35}",
+              "definition": "Specifies the name of the market-specific attribute.",
+              "children": []
+            },
+            {
+              "level": "3",
+              "name": "Value",
+              "xmlTag": "<Val>",
+              "mult": "[1..1]",
+              "typeCode": "text{1,350}",
+              "definition": "Specifies the value of the market-specific attribute.",
+              "children": []
+            }
+          ]
+        },
+        {
+          "level": "2",
+          "name": "Restriction",
+          "xmlTag": "<Rstrctn>",
+          "mult": "[0..*]",
+          "definition": "Defines the specific processing characteristics for a securities account to ensure configurability of specific requirements, as prescribed by national legal and regulatory requirements and practices.",
+          "children": [
+            {
+              "level": "3",
+              "name": "Valid From",
+              "xmlTag": "<VldFr>",
+              "mult": "[1..1]",
+              "typeCode": "dateTime",
+              "definition": "Specifies the date from which the restriction is valid.",
+              "children": []
+            },
+            {
+              "level": "3",
+              "name": "Valid To",
+              "xmlTag": "<VldTo>",
+              "mult": "[0..1]",
+              "typeCode": "dateTime",
+              "definition": "Specifies the date until which the restriction is valid.",
+              "children": []
+            },
+            {
+              "level": "3",
+              "name": "Type",
+              "xmlTag": "<Tp>",
+              "mult": "[1..1]",
+              "typeCode": "text{1,35}",
+              "definition": "Specifies the identification of a restriction.",
+              "children": []
+            }
+          ]
+        },
+        {
+          "level": "2",
+          "name": "End Investor Flag",
+          "xmlTag": "<EndInvstrFlg>",
+          "mult": "[0..1]",
+          "typeCode": "text\r\r\n[a-zA-Z0-9]{4}",
+          "definition": "Specifies information to identify securities accounts where allocation instructions are posted.",
+          "children": []
+        },
+        {
+          "level": "2",
+          "name": "Pricing Scheme",
+          "xmlTag": "<PricgSchme>",
+          "mult": "[0..1]",
+          "typeCode": "text\r\r\n[a-zA-Z0-9]{4}",
+          "definition": "Defines how the price is applied to the securities account.",
+          "children": []
+        },
+        {
+          "level": "2",
+          "name": "Account Details",
+          "xmlTag": "<AcctDtls>",
+          "mult": "[1..1]",
+          "children": [
+            {
+              "level": "3",
+              "name": "Activation Type",
+              "xmlTag": "<ActvnTp>",
+              "mult": "[0..1]",
+              "typeCode": "text",
+              "children": []
+            },
+            {
+              "level": "3",
+              "name": "Name",
+              "xmlTag": "<Nm>",
+              "mult": "[0..1]",
+              "typeCode": "text{1,35}",
+              "definition": "Account name",
+              "children": []
+            },
+            {
+              "level": "3",
+              "name": "Alternate Id",
+              "xmlTag": "<AltId>",
+              "mult": "[0..1]",
+              "typeCode": "text{1,35}",
+              "definition": "Available optional account identification",
+              "children": []
+            },
+            {
+              "level": "3",
+              "name": "Nominee",
+              "xmlTag": "<NmnOwn>",
+              "mult": "[0..1]",
+              "children": [
+                {
+                  "level": "4",
+                  "name": "Identification",
+                  "xmlTag": "<Id>",
+                  "mult": "[1..1]",
+                  "typeCode": "text{1,35}",
+                  "children": []
+                },
+                {
+                  "level": "4",
+                  "name": "Scheme Name",
+                  "xmlTag": "<SchmeNm>",
+                  "mult": "[1..1]",
+                  "typeCode": "text",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "level": "3",
+              "name": "Beneficial Owner",
+              "xmlTag": "<BnfcOwn>",
+              "mult": "[0..*]",
+              "children": [
+                {
+                  "level": "4",
+                  "name": "Identification",
+                  "xmlTag": "<Id>",
+                  "mult": "[1..1]",
+                  "children": [
+                    {
+                      "level": "5",
+                      "name": "Identification",
+                      "xmlTag": "<Id>",
+                      "mult": "[1..1]",
+                      "typeCode": "text{1,35}",
+                      "children": []
+                    },
+                    {
+                      "level": "5",
+                      "name": "Scheme Name",
+                      "xmlTag": "<SchmeNm>",
+                      "mult": "[1..1]",
+                      "typeCode": "text",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "level": "4",
+                  "name": "Primary Owner",
+                  "xmlTag": "<PmOwn>",
+                  "mult": "[1..1]",
+                  "typeCode": "boolean",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "level": "3",
+              "name": "Account Label",
+              "xmlTag": "<ActLbl>",
+              "mult": "[0..1]",
+              "typeCode": "text",
+              "children": []
+            },
+            {
+              "level": "3",
+              "name": "Tax Residence",
+              "xmlTag": "<TxRs>",
+              "mult": "[0..1]",
+              "typeCode": "text\r\r\n[A-Z]{2,2}",
+              "children": []
+            },
+            {
+              "level": "3",
+              "name": "Account Group",
+              "xmlTag": "<AcctGrp>",
+              "mult": "[0..1]",
+              "children": [
+                {
+                  "level": "4",
+                  "name": "Name",
+                  "xmlTag": "<Nm>",
+                  "mult": "[0..1]",
+                  "typeCode": "text{1,35}",
+                  "definition": "Name of the group to which the account belongs, e.g. default string ‘Allow’. \r\r\nThis functionality allows defining user access rules to only access certain account groups and thereby only have access to certain securities accounts.\r\r\nThe ‘Allow’ group is the only group available in the system as default, however, members can define more groups through NCSD Account maintenance GUI.",
+                  "children": []
+                },
+                {
+                  "level": "4",
+                  "name": "Owner",
+                  "xmlTag": "<Own>",
+                  "mult": "[0..1]",
+                  "children": [
+                    {
+                      "level": "5",
+                      "name": "Identification",
+                      "xmlTag": "<Id>",
+                      "mult": "[1..1]",
+                      "typeCode": "text{1,35}",
+                      "definition": "Proprietary information, often a code, issued by the data source scheme issuer.",
+                      "children": []
+                    },
+                    {
+                      "level": "5",
+                      "name": "Issuer",
+                      "xmlTag": "<Issr>",
+                      "mult": "[1..1]",
+                      "typeCode": "text{1,35}",
+                      "isIgnored": "Yes",
+                      "definition": "Entity that assigns the identification.",
+                      "children": []
+                    },
+                    {
+                      "level": "5",
+                      "name": "Scheme Name",
+                      "xmlTag": "<SchmeNm>",
+                      "mult": "[0..1]",
+                      "typeCode": "text{1,35}",
+                      "definition": "Short textual description of the scheme.",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "level": "3",
+              "name": "Holder",
+              "xmlTag": "<Hldr>",
+              "mult": "[0..1]",
+              "definition": "Reference to the investor that is holder of the securities account. The holder is referred to through its Investor ID",
+              "children": [
+                {
+                  "level": "4",
+                  "name": "Identification",
+                  "xmlTag": "<Id>",
+                  "mult": "[1..1]",
+                  "typeCode": "Choice",
+                  "definition": "Unique identification of the party.",
+                  "children": [
+                    {
+                      "level": "5",
+                      "name": "Any BIC",
+                      "xmlTag": "<AnyBIC>",
+                      "mult": "[1..1]",
+                      "typeCode": "text\r\r\n[A-Z0-9]{4,4}[A-Z]{2,2}[A-Z0-9]{2,2}([A-Z0-9]{3,3}){0,1}",
+                      "definition": "Code allocated to a financial or non-financial institution by the ISO 9362 Registration Authority, as described in ISO 9362 \"Banking - Banking telecommunication messages - Business identifier code (BIC)\".",
+                      "children": []
+                    },
+                    {
+                      "level": "5",
+                      "name": "Proprietary Identification",
+                      "xmlTag": "<PrtryId>",
+                      "mult": "[1..1]",
+                      "definition": "Unique and unambiguous identifier, as assigned to a financial institution using a proprietary identification scheme.",
+                      "children": [
+                        {
+                          "level": "6",
+                          "name": "Identification",
+                          "xmlTag": "<Id>",
+                          "mult": "[1..1]",
+                          "typeCode": "text{1,35}",
+                          "definition": "Proprietary information, often a code, issued by the data source scheme issuer.",
+                          "children": []
+                        },
+                        {
+                          "level": "6",
+                          "name": "Issuer",
+                          "xmlTag": "<Issr>",
+                          "mult": "[1..1]",
+                          "typeCode": "text{1,35}",
+                          "isIgnored": "Yes",
+                          "definition": "Entity that assigns the identification.",
+                          "children": []
+                        },
+                        {
+                          "level": "6",
+                          "name": "Scheme Name",
+                          "xmlTag": "<SchmeNm>",
+                          "mult": "[0..1]",
+                          "typeCode": "text{1,35}",
+                          "definition": "Short textual description of the scheme.",
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "level": "5",
+                      "name": "Name And Address",
+                      "xmlTag": "<NmAndAdr>",
+                      "mult": "[1..1]",
+                      "definition": "Name and address of a party.",
+                      "children": [
+                        {
+                          "level": "6",
+                          "name": "Name",
+                          "xmlTag": "<Nm>",
+                          "mult": "[1..1]",
+                          "typeCode": "text{1,350}",
+                          "definition": "Name by which a party is known and which is usually used to identify that party.",
+                          "children": []
+                        },
+                        {
+                          "level": "6",
+                          "name": "Address",
+                          "xmlTag": "<Adr>",
+                          "mult": "[0..1]",
+                          "definition": "Postal address of the party.",
+                          "children": [
+                            {
+                              "level": "7",
+                              "name": "Address Type",
+                              "xmlTag": "<AdrTp>",
+                              "mult": "[0..1]",
+                              "typeCode": "text",
+                              "definition": "Identifies the nature of the postal address.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Address Line",
+                              "xmlTag": "<AdrLine>",
+                              "mult": "[0..5]",
+                              "typeCode": "text{1,70}",
+                              "definition": "Information that locates and identifies a specific address, as defined by postal services, that is presented in free format text.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Street Name",
+                              "xmlTag": "<StrtNm>",
+                              "mult": "[0..1]",
+                              "typeCode": "text{1,70}",
+                              "definition": "Name of a street or thoroughfare.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Building Number",
+                              "xmlTag": "<BldgNb>",
+                              "mult": "[0..1]",
+                              "typeCode": "text{1,16}",
+                              "definition": "Number that identifies the position of a building on a street.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Post Code",
+                              "xmlTag": "<PstCd>",
+                              "mult": "[0..1]",
+                              "typeCode": "text{1,16}",
+                              "definition": "Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Town Name",
+                              "xmlTag": "<TwnNm>",
+                              "mult": "[0..1]",
+                              "typeCode": "text{1,35}",
+                              "definition": "Name of a built-up area, with defined boundaries, and a local government.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Country Sub Division",
+                              "xmlTag": "<CtrySubDvsn>",
+                              "mult": "[0..1]",
+                              "typeCode": "text{1,35}",
+                              "definition": "Identifies a subdivision of a country for example, state, region, county.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Country",
+                              "xmlTag": "<Ctry>",
+                              "mult": "[1..1]",
+                              "typeCode": "text\r\r\n[A-Z]{2,2}",
+                              "definition": "Nation with its own government.",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "level": "4",
+                  "name": "LEI",
+                  "xmlTag": "<LEI>",
+                  "mult": "[0..1]",
+                  "typeCode": "text\r\r\n[A-Z0-9]{18,18}[0-9]{2,2}",
+                  "definition": "Legal entity identification as an alternate identification for a party.",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "level": "3",
+              "name": "Settlement Priority",
+              "xmlTag": "<SttlPrt>",
+              "mult": "[0..1]",
+              "typeCode": "text",
+              "children": []
+            },
+            {
+              "level": "3",
+              "name": "Default On Hold",
+              "xmlTag": "<DfltOnHld>",
+              "mult": "[0..1]",
+              "typeCode": "boolean",
+              "children": []
+            },
+            {
+              "level": "3",
+              "name": "Is Settlement ISO Notification",
+              "xmlTag": "<IsStlmtISONtf>",
+              "mult": "[0..1]",
+              "typeCode": "boolean",
+              "children": []
+            },
+            {
+              "level": "3",
+              "name": "Is Corporate Action ISO Notification",
+              "xmlTag": "<IsCAISONtf>",
+              "mult": "[0..1]",
+              "typeCode": "boolean",
+              "children": []
+            },
+            {
+              "level": "3",
+              "name": "Is Central Counterparty ISO Notification",
+              "xmlTag": "<IsCCPISONtf>",
+              "mult": "[0..1]",
+              "typeCode": "boolean",
+              "children": []
+            },
+            {
+              "level": "3",
+              "name": "Interested Party",
+              "xmlTag": "<IntPty>",
+              "mult": "[0..*]",
+              "children": [
+                {
+                  "level": "4",
+                  "name": "Interested Party Type",
+                  "xmlTag": "<IntPtyTp>",
+                  "mult": "[0..1]",
+                  "typeCode": "text",
+                  "children": []
+                },
+                {
+                  "level": "4",
+                  "name": "Identification",
+                  "xmlTag": "<Id>",
+                  "mult": "[0..1]",
+                  "children": [
+                    {
+                      "level": "5",
+                      "name": "BIC",
+                      "xmlTag": "<BIC>",
+                      "mult": "[0..1]",
+                      "typeCode": "text\r\r\n[A-Z0-9]{4,4}[A-Z]{2,2}[A-Z0-9]{2,2}([A-Z0-9]{3,3}){0,1}",
+                      "children": []
+                    },
+                    {
+                      "level": "5",
+                      "name": "NIN",
+                      "xmlTag": "<NIN>",
+                      "mult": "[0..1]",
+                      "typeCode": "text{1,35}",
+                      "definition": "National Identity Number",
+                      "children": []
+                    },
+                    {
+                      "level": "5",
+                      "name": "GIIN",
+                      "xmlTag": "<GIIN>",
+                      "mult": "[0..1]",
+                      "typeCode": "text{19}\r\r\n[A-Z0-9]{6}[.][A-Z0-9]{5}[.][A-Z]{2}[.][0-9]{3}",
+                      "definition": "Global Intermediary Identification Number. The GIIN may be used by a financial institution to \r\r\nidentify itself to withholding agents and tax administrations for FATCA reporting.",
+                      "children": []
+                    },
+                    {
+                      "level": "5",
+                      "name": "LEI",
+                      "xmlTag": "<LEI>",
+                      "mult": "[0..1]",
+                      "typeCode": "text\r\r\n[A-Z0-9]{18,18}[0-9]{2,2}",
+                      "children": []
+                    },
+                    {
+                      "level": "5",
+                      "name": "Investor Id",
+                      "xmlTag": "<InvId>",
+                      "mult": "[0..1]",
+                      "typeCode": "text{1,35}",
+                      "definition": "Investor identifier",
+                      "children": []
+                    },
+                    {
+                      "level": "5",
+                      "name": "Tax Id",
+                      "xmlTag": "<TxId>",
+                      "mult": "[0..1]",
+                      "children": [
+                        {
+                          "level": "6",
+                          "name": "Identification",
+                          "xmlTag": "<Id>",
+                          "mult": "[1..1]",
+                          "typeCode": "text{1,35}",
+                          "definition": "Tax identification number or identifier.",
+                          "children": []
+                        },
+                        {
+                          "level": "6",
+                          "name": "Tax Identification Type",
+                          "xmlTag": "<TaxIdTp>",
+                          "mult": "[1..1]",
+                          "typeCode": "Choice",
+                          "definition": "Type of tax identification number or identifier.",
+                          "children": [
+                            {
+                              "level": "7",
+                              "name": "Code",
+                              "xmlTag": "<Cd>",
+                              "mult": "[1..1]",
+                              "typeCode": "text",
+                              "definition": "Type of tax identification number or identifier expressed as a code.",
+                              "children": []
+                            },
+                            {
+                              "level": "7",
+                              "name": "Proprietary",
+                              "xmlTag": "<Prtry>",
+                              "mult": "[1..1]",
+                              "definition": "Type of tax identification number expressed as a proprietary code.",
+                              "children": [
+                                {
+                                  "level": "8",
+                                  "name": "Identification",
+                                  "xmlTag": "<Id>",
+                                  "mult": "[1..1]",
+                                  "typeCode": "text\r\r\n[a-zA-Z0-9]{4}",
+                                  "definition": "Proprietary information, often a code, issued by the data source scheme issuer.",
+                                  "children": []
+                                },
+                                {
+                                  "level": "8",
+                                  "name": "Issuer",
+                                  "xmlTag": "<Issr>",
+                                  "mult": "[1..1]",
+                                  "typeCode": "text{1,4}\r\r\n[a-zA-Z0-9]{1,4}",
+                                  "definition": "Entity that assigns the identification.",
+                                  "children": []
+                                },
+                                {
+                                  "level": "8",
+                                  "name": "Scheme Name",
+                                  "xmlTag": "<SchmeNm>",
+                                  "mult": "[0..1]",
+                                  "typeCode": "text{1,4}\r\r\n[a-zA-Z0-9]{1,4}",
+                                  "definition": "Short textual description of the scheme.",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "level": "6",
+                          "name": "Issuer",
+                          "xmlTag": "<Issr>",
+                          "mult": "[0..1]",
+                          "typeCode": "text{1,35}",
+                          "definition": "Entity that assigns the identifier.",
+                          "children": []
+                        },
+                        {
+                          "level": "6",
+                          "name": "Issue Date",
+                          "xmlTag": "<IsseDt>",
+                          "mult": "[0..1]",
+                          "typeCode": "date",
+                          "definition": "Date at which the identification was issued.",
+                          "children": []
+                        },
+                        {
+                          "level": "6",
+                          "name": "Expiry Date",
+                          "xmlTag": "<XpryDt>",
+                          "mult": "[0..1]",
+                          "typeCode": "date",
+                          "definition": "Date at which the identification expires.",
+                          "children": []
+                        },
+                        {
+                          "level": "6",
+                          "name": "Issuer Country",
+                          "xmlTag": "<IssrCtry>",
+                          "mult": "[1..1]",
+                          "typeCode": "text\r\r\n[A-Z]{2,2}",
+                          "definition": "Country that issued the tax identification.",
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "level": "5",
+                      "name": "Other identifier",
+                      "xmlTag": "<OthrId>",
+                      "mult": "[0..1]",
+                      "typeCode": "text{1,70}",
+                      "definition": "Any other identifier and the issuer seperated by a forward slash",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "level": "3",
+              "name": "Revenue SSI",
+              "xmlTag": "<RevSSI>",
+              "mult": "[0..*]",
+              "children": [
+                {
+                  "level": "4",
+                  "name": "Currencies",
+                  "xmlTag": "<Curr>",
+                  "mult": "[0..*]",
+                  "typeCode": "text\r\r\n[A-Z]{3,3}",
+                  "children": []
+                },
+                {
+                  "level": "4",
+                  "name": "Default",
+                  "xmlTag": "<Dflt>",
+                  "mult": "[0..1]",
+                  "typeCode": "boolean",
+                  "children": []
+                },
+                {
+                  "level": "4",
+                  "name": "Operator",
+                  "xmlTag": "<Opr>",
+                  "mult": "[0..1]",
+                  "typeCode": "text\r\r\n[A-Z0-9]{4,4}[A-Z]{2,2}[A-Z0-9]{2,2}([A-Z0-9]{3,3}){0,1}",
+                  "definition": "BIC code of the bank where the bank account is held",
+                  "children": []
+                },
+                {
+                  "level": "4",
+                  "name": "Account Id",
+                  "xmlTag": "<AcctNo>",
+                  "mult": "[0..1]",
+                  "typeCode": "Choice",
+                  "children": [
+                    {
+                      "level": "5",
+                      "name": "IBAN",
+                      "xmlTag": "<IBAN>",
+                      "mult": "[1..1]",
+                      "typeCode": "text\r\r\n[A-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}",
+                      "definition": "International Bank Account Number (IBAN) - identifier used internationally by financial institutions to uniquely identify the account of a customer. Further specifications of the format and content of the IBAN can be found in the standard ISO 13616 \"Banking and related financial services - International Bank Account Number (IBAN)\" version 1997-10-01, or later revisions.",
+                      "children": []
+                    },
+                    {
+                      "level": "5",
+                      "name": "Proprietary",
+                      "xmlTag": "<Prtry>",
+                      "mult": "[1..1]",
+                      "typeCode": "text{1,34}",
+                      "definition": "Unique identifier for an account. It is assigned by the account servicer using a proprietary identification scheme.",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "level": "4",
+                  "name": "Account Name",
+                  "xmlTag": "<AcctNm>",
+                  "mult": "[0..1]",
+                  "typeCode": "text{1,35}",
+                  "children": []
+                },
+                {
+                  "level": "4",
+                  "name": "Beneficiary Name",
+                  "xmlTag": "<BnfcrNm>",
+                  "mult": "[0..1]",
+                  "typeCode": "text{1,40}",
+                  "children": []
+                },
+                {
+                  "level": "4",
+                  "name": "Beneficiary BIC",
+                  "xmlTag": "<BnfcrBIC>",
+                  "mult": "[0..1]",
+                  "typeCode": "text\r\r\n[A-Z0-9]{4,4}[A-Z]{2,2}[A-Z0-9]{2,2}([A-Z0-9]{3,3}){0,1}",
+                  "children": []
+                },
+                {
+                  "level": "4",
+                  "name": "Receiver BIC",
+                  "xmlTag": "<RcvrBIC>",
+                  "mult": "[0..1]",
+                  "typeCode": "text\r\r\n[A-Z0-9]{4,4}[A-Z]{2,2}[A-Z0-9]{2,2}([A-Z0-9]{3,3}){0,1}",
+                  "children": []
+                },
+                {
+                  "level": "4",
+                  "name": "Intermediary BIC",
+                  "xmlTag": "<IntrmdrBIC>",
+                  "mult": "[0..1]",
+                  "typeCode": "text\r\r\n[A-Z0-9]{4,4}[A-Z]{2,2}[A-Z0-9]{2,2}([A-Z0-9]{3,3}){0,1}",
+                  "children": []
+                },
+                {
+                  "level": "4",
+                  "name": "Addressee BIC",
+                  "xmlTag": "<AddrseBIC>",
+                  "mult": "[0..1]",
+                  "typeCode": "text\r\r\n[A-Z0-9]{4,4}[A-Z]{2,2}[A-Z0-9]{2,2}([A-Z0-9]{3,3}){0,1}",
+                  "children": []
+                },
+                {
+                  "level": "4",
+                  "name": "Payment Instruction Type",
+                  "xmlTag": "<PmtInstrTp>",
+                  "mult": "[0..1]",
+                  "typeCode": "text",
+                  "children": []
+                },
+                {
+                  "level": "4",
+                  "name": "Related reference",
+                  "xmlTag": "<RlRef>",
+                  "mult": "[0..1]",
+                  "typeCode": "text{1,16}",
+                  "children": []
+                },
+                {
+                  "level": "4",
+                  "name": "External Account State",
+                  "xmlTag": "<Stts>",
+                  "mult": "[0..1]",
+                  "typeCode": "text",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "level": "3",
+              "name": "Comments",
+              "xmlTag": "<Cmts>",
+              "mult": "[0..1]",
+              "typeCode": "text{1,500}",
+              "children": []
+            },
+            {
+              "level": "3",
+              "name": "Lending Pool",
+              "xmlTag": "<LndPl>",
+              "mult": "[0..1]",
+              "typeCode": "boolean",
+              "definition": "Indicates if the securities account is eligible for the lending pool for ISBL transactions",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "level": "1",
+      "name": "Supplementary Data",
+      "xmlTag": "<SplmtryData>",
+      "mult": "[0..*]",
+      "definition": "Additional information that cannot be captured in the structured elements and/or any other specific block.",
+      "children": [
+        {
+          "level": "2",
+          "name": "Place And Name",
+          "xmlTag": "<PlcAndNm>",
+          "mult": "[0..1]",
+          "typeCode": "text{1,350}",
+          "definition": "Unambiguous reference to the location where the supplementary data must be inserted in the message instance.\r\r\nIn the case of XML, this is expressed by a valid XPath.",
+          "children": []
+        },
+        {
+          "level": "2",
+          "name": "Envelope",
+          "xmlTag": "<Envlp>",
+          "mult": "[1..1]",
+          "definition": "Technical element wrapping the supplementary data.",
+          "children": []
+        }
+      ]
+    }
+  ]
+}]

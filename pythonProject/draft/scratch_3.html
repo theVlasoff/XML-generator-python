@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Divide Web Page into Two Parts</title>
+    <style>
+      /* Define the left and right parts using CSS */
+      .left {
+        width: 40%;
+        float: left;
+      }
+
+      .right {
+        width: 60%;
+        float: right;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Create the left part using HTML -->
+    <div class="left">
+      <h2>Input Fields</h2>
+      <form>
+        <label for="input1">Input 1:</label>
+        <input type="text" id="input1" name="input1"><br><br>
+        
+        <label for="input2">Input 2:</label>
+        <input type="text" id="input2" name="input2"><br><br>
+        
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+
+    <!-- Create the right part using HTML -->
+    <div class="right">
+      <h2>Results</h2>
+      <textarea id="results" rows="10"></textarea>
+    </div>
+  </body>
+</html>

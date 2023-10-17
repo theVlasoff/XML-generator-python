@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<xs:schema xmlns="urn:iso:std:iso:20022:tech:xsd:reda.018.001.01" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <Document>45</Document>
+  <SecuritiesAccountCreationRequestV01>71</SecuritiesAccountCreationRequestV01>
+  <NCSDSecuritiesAccountTypeCode>41</NCSDSecuritiesAccountTypeCode>
+  <Max35Text>64</Max35Text>
+  <Max35Text>5</Max35Text>
+  <Max35Text>2</Max35Text>
+  <Max35Text>67</Max35Text>
+  <Max35Text>0</Max35Text>
+  <Max35Text>1</Max35Text>
+  <NCSDPartyIdentifierTypeCode>37</NCSDPartyIdentifierTypeCode>
+  <Max35Text>36</Max35Text>
+  <ISODateTime>92</ISODateTime>
+  <Max350Text>4</Max350Text>
+  <PostalAddress1>57</PostalAddress1>
+  <AnyBICDec2014Identifier>24</AnyBICDec2014Identifier>
+  <GenericIdentification36>4</GenericIdentification36>
+  <NameAndAddress5>74</NameAndAddress5>
+  <GenericIdentification36__1>74</GenericIdentification36__1>
+  <PartyIdentification120Choice>13</PartyIdentification120Choice>
+  <LEIIdentifier>39</LEIIdentifier>
+  <PartyIdentification120Choice__1>80</PartyIdentification120Choice__1>
+  <AddressType2Code>69</AddressType2Code>
+  <Max70Text>29</Max70Text>
+  <Max70Text>90</Max70Text>
+  <Max16Text>51</Max16Text>
+  <Max16Text>42</Max16Text>
+  <Max35Text>2</Max35Text>
+  <Max35Text>36</Max35Text>
+  <CountryCode>43</CountryCode>
+  <MessageHeader1>2</MessageHeader1>
+  <SystemSecuritiesAccount7__1>8</SystemSecuritiesAccount7__1>
+  <SupplementaryData1>91</SupplementaryData1>
+  <Max350Text>19</Max350Text>
+  <SupplementaryDataEnvelope1>28</SupplementaryDataEnvelope1>
+  <PartyIdentification136>24</PartyIdentification136>
+  <PartyIdentification136__1>32</PartyIdentification136__1>
+  <SystemPartyIdentification8__1>0</SystemPartyIdentification8__1>
+  <Max35Text>94</Max35Text>
+  <SystemSecuritiesAccountType1Choice__1>49</SystemSecuritiesAccountType1Choice__1>
+  <ISODate>32</ISODate>
+  <TrueFalseIndicator>91</TrueFalseIndicator>
+  <TrueFalseIndicator>45</TrueFalseIndicator>
+  <GenericIdentification30__1>9</GenericIdentification30__1>
+</xs:schema>
